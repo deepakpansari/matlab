@@ -66,8 +66,8 @@ for i=1:(length(dataMatrix(1,:))-2)
     funcStr = funcStr + funcSeg; %adding up those string%
     funcSeg = 1;
 end
-disp(simplify(funcStr)); % displaying the string by simplifying it first%
+disp(vpa(simplify(funcStr),6)); % displaying the string by simplifying it first%
 
 %------calculating the functional value----%
-val = subs(funcStr,x,x_val); % calculating functional value by just substitution%
+val = vpa(subs(funcStr,x,x_val),6); % calculating functional value by just substitution%
 end
