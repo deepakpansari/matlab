@@ -1,4 +1,4 @@
-function [a_temp,b_temp,c_temp] = fit_pow_abc(x,y)
+function [a,b,c] = fit_pow_abc(x,y)
 
 
 %Curve fitting for power law%
@@ -49,12 +49,6 @@ elseif rem(length(x),2)==0
 end
 
 c = c_avg;
-
-%%% copy all a b c from command window and paste it here %%%
-
-a_temp=a;
-b_temp=b;
-c_temp=c;
 
 scatter(x,y)
 hold on
