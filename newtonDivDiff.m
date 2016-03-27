@@ -44,15 +44,52 @@ for i=1:(length(dataMatrix(1,:))-2)
 end
     fprintf('\n');
     fprintf('--------------------------------------------------------------------------------------------\n\n')
-    
+%--------changing the matrix so it looks better-----%
+%making the matrix with 2*i-1 and j elements%
+i=1;
+for j=1:2
+    for k=1:(2*length(dataMatrix(:,1))-1)
+        if mod(k,2)==0
+            matrixDataNew(k,j)= 0;
+        else
+            matrixDataNew(k,j)=dataMatrix(i,j);
+            i=i+1;
+        end
+    end
+    i=1;
+end
+odd=1;
+for j=3:length(dataMatrix(1,:))
+    for k=(j-1):(2*length(dataMatrix(:,1))-1)
+        if odd==0
+            matrixDataNew(k,j)= 0;
+           odd=1;
+        else
+            matrixDataNew(k,j)=dataMatrix(i,j);
+            i=i+1;
+            odd=0;
+        end
+    end
+    i=1;
+    odd=1;
+end
 
-%--------printing the data----------------%
-for i=1:(length(dataMatrix(:,1)))
-    for j=1:(length(dataMatrix(1,:)))
-        fprintf('%f\t',dataMatrix(i,j)) %printing data element by element%
+i=1;
+j=1;
+%--------Printing the table -------------%
+for i=1:(length(matrixDataNew(:,1)))
+    for j=1:(length(matrixDataNew(1,:)))
+       if matrixDataNew(i,j) == false
+           % fprintf('%f\t',matrixDataNew(i,j)) %printing data element by element%
+           fprintf('\t\t');
+       else
+           % fprintf('%f\t',matrixDataNew(i,j)) %printing data element by element%
+           fprintf('%f\t',matrixDataNew(i,j));
+       end
     end
     fprintf('\n');
 end
+
 
 %--------returning the function ----------%
 syms x;  % defining x to be used in the function%
@@ -70,4 +107,6 @@ disp(vpa(simplify(funcStr),6)); % displaying the string by simplifying it first%
 
 %------calculating the functional value----%
 val = vpa(subs(funcStr,x,x_val),6); % calculating functional value by just substitution%
+
+
 end
