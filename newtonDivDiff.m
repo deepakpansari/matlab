@@ -50,7 +50,7 @@ i=1;
 for j=1:2
     for k=1:(2*length(dataMatrix(:,1))-1)
         if mod(k,2)==0
-            matrixDataNew(k,j)= 0;
+            matrixDataNew(k,j)= 0.229822;
         else
             matrixDataNew(k,j)=dataMatrix(i,j);
             i=i+1;
@@ -59,10 +59,14 @@ for j=1:2
     i=1;
 end
 odd=1;
+j_init = 2*length(dataMatrix(:,1))-1;
 for j=3:length(dataMatrix(1,:))
-    for k=(j-1):(2*length(dataMatrix(:,1))-1)
+    for k=1:(j-2)
+        matrixDataNew(k,j)= 0.229822;
+    end
+    for k=(j-1):(j_init-2*(j-2))
         if odd==0
-            matrixDataNew(k,j)= 0;
+            matrixDataNew(k,j)= 0.229822;
            odd=1;
         else
             matrixDataNew(k,j)=dataMatrix(i,j);
@@ -73,13 +77,14 @@ for j=3:length(dataMatrix(1,:))
     i=1;
     odd=1;
 end
-
 i=1;
 j=1;
 %--------Printing the table -------------%
 for i=1:(length(matrixDataNew(:,1)))
     for j=1:(length(matrixDataNew(1,:)))
-       if matrixDataNew(i,j) == false
+       if ((matrixDataNew(i,j) == 0.229822))
+           fprintf('\t\t');
+       elseif (matrixDataNew(i,j) == 0)
            % fprintf('%f\t',matrixDataNew(i,j)) %printing data element by element%
            fprintf('\t\t');
        else
